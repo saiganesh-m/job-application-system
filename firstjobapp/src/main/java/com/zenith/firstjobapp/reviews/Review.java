@@ -1,89 +1,61 @@
-package com.zenith.firstjobapp.job;
+package com.zenith.firstjobapp.reviews;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zenith.firstjobapp.company.Company;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-// import jakarta.persistence.Table;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-// @Table(name = "job_table")
-public class Job {
+public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
-    private String minSalary;
-    private String maxSalary;
-    private String location;
+    private double rating;
 
-    @ManyToOne()
+    @JsonIgnore
+    @ManyToOne
     private Company company;
 
-    public Job() {
+    public Review() {
     }
-
-    public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
+    public Review(Long id, String title, String description, double rating) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.minSalary = minSalary;
-        this.maxSalary = maxSalary;
-        this.location = location;
+        this.rating = rating;
     }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
-
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public String getLocation() {
-        return location;
+    public double getRating() {
+        return rating;
     }
-
-    public void setLocation(String location) {
-        this.location = location;
+    public void setRating(double rating) {
+        this.rating = rating;
     }
-
-    public String getMinSalary() {
-        return minSalary;
-    }
-
-    public void setMinSalary(String minSalary) {
-        this.minSalary = minSalary;
-    }
-
-    public String getMaxSalary() {
-        return maxSalary;
-    }
-
-    public void setMaxSalary(String maxSalary) {
-        this.maxSalary = maxSalary;
-    }
-
     public Company getCompany() {
         return company;
     }

@@ -2,7 +2,9 @@ package com.zenith.firstjobapp.company;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zenith.firstjobapp.job.Job;
+import com.zenith.firstjobapp.reviews.Review;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,10 +19,14 @@ public class Company {
     private Long id;
     private String name;
     private String description;
-    
-    @OneToMany
+
+    // Ignores recursive serialization issues
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
     // Constructors
     public Company() {}
 
@@ -48,5 +54,17 @@ public class Company {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+    public List<Job> getJobs() {
+        return jobs;
+    }
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
+    }
+    public List<Review> getReviews() {
+        return reviews;
+    }
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
